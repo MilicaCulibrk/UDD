@@ -22,14 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("search")
 public class SearchController {
 
-    //elastic search repository
     @Autowired
     private BookRepository bookRepository;
 
     @Autowired
     private SearchService searchService;
 
-    //kveri bilder za search, sve kroz ovaj kontroler, sve sto se searchuje
     @PostMapping()
     public ResponseEntity<?> searchBook(@RequestBody SearchDTO searchDTO) throws ParseException {
 

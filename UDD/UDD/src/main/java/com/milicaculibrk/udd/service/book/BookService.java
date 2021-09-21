@@ -6,11 +6,17 @@ import com.milicaculibrk.udd.model.Writer;
 import com.milicaculibrk.udd.repository.WriterRepository;
 import com.milicaculibrk.udd.service.Indexer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -63,8 +69,6 @@ public class BookService {
         return uploadBookDTO;
     }
 
-    //dto se prevodi u index unit jer se on mora tako cuvati i onda se samo pozove indexer, isto njihova fukncija valjda
-    //NIJE - Indexer
     private void indexBook(UploadBookDTO uploadBookDto) throws IOException{
 
         for (MultipartFile file : uploadBookDto.getFiles()) {
@@ -124,5 +128,20 @@ public class BookService {
         }
 
         return file;
+    }
+
+    public Resource downloadBook(String url){
+
+        Path path = Paths.get(url);
+        Resource resource = null;
+
+        try {
+            resource = new UrlResource(path.toUri());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        return resource;
+
     }
 }

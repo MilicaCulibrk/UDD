@@ -31,7 +31,6 @@ public class IndexerController {
     @Autowired
     private WriterRepository writerRepository;
 
-    //elastic search repository
     @Autowired
     private BookRepository bookRepository;
 
@@ -49,8 +48,6 @@ public class IndexerController {
 
     }
 
-    //napravim model popunim informacijama sa fronta,  i onda se koristi isto repozitorijum
-    //koji ce indeksirati taj model
     @PostMapping()
     public ResponseEntity<?> addNewBook(@RequestParam("files") MultipartFile files,
                                                        @RequestParam("title") String title,
@@ -72,7 +69,7 @@ public class IndexerController {
     @DeleteMapping("/{fileName}")
     public ResponseEntity<?> deleteFile(@PathVariable String fileName) {
 
-        String targetFilePath = "/Users/damjanpantic/Desktop/FAX/Master/UDD/UDD/target/classes/files/" + fileName;
+        String targetFilePath = "C:/Users/Milica/Desktop/UDD-main/UDD/UDD/target/classes/files/" + fileName;
         indexer.delete(targetFilePath);
 
         return new ResponseEntity<>("Successfully deleted!", HttpStatus.OK);
@@ -83,14 +80,7 @@ public class IndexerController {
     @PostMapping("/download")
     public ResponseEntity<?> downloadBook(@RequestParam("url") String url) {
 
-        Path path = Paths.get(url);
-        Resource resource = null;
-
-        try {
-            resource = new UrlResource(path.toUri());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        Resource resource = bookService.downloadBook(url);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType("application/pdf"))

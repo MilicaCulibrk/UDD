@@ -256,7 +256,7 @@ export default {
         operatorKeyWords: "AND",
         text: "",
         operatorText: "AND",
-        searchType: "regular",
+        searchType: "phrase",
       },
     };
   },

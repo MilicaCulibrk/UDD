@@ -1,12 +1,10 @@
 package com.milicaculibrk.udd.service.book;
 
 
-import com.milicaculibrk.udd.enums.SearchType;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.QueryBuilders;
 
-//kopirali od njega, kad pravis kveri
 public class QueryBuilder {
 	
 	private static int maxEdits = 1;
@@ -19,7 +17,7 @@ public class QueryBuilder {
 		QueryBuilder.maxEdits = maxEdits;
 	}
 	
-	public static org.elasticsearch.index.query.QueryBuilder buildQuery(SearchType queryType, String field, String value) throws IllegalArgumentException, ParseException{
+	public static org.elasticsearch.index.query.QueryBuilder buildQuery(String queryType, String field, String value) throws IllegalArgumentException, ParseException{
 		String errorMessage = "";
 		if(field == null || field.equals("")){
 			errorMessage += "Field not specified";
@@ -32,12 +30,9 @@ public class QueryBuilder {
 			throw new IllegalArgumentException(errorMessage);
 		}
 
-		//izbacili fazi jer radi kao phase
 		org.elasticsearch.index.query.QueryBuilder retVal = null;
-		if(queryType.equals(SearchType.regular)){
+		if(queryType.equals("regular")){
 			retVal = QueryBuilders.termQuery(field, value);
-		}else if(queryType.equals(SearchType.fuzzy)){
-			retVal = QueryBuilders.fuzzyQuery(field, value).fuzziness(Fuzziness.fromEdits(maxEdits));
 		}else{
 			retVal = QueryBuilders.matchPhraseQuery(field, value);
 		}

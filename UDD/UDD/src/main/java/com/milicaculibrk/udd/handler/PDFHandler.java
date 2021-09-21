@@ -26,9 +26,8 @@ public class PDFHandler{
 			PDDocument pdf = parser.getPDDocument();
 			PDDocumentInformation information = pdf.getDocumentInformation();
 
-			//zasto ovai prazni navodnici i gde je zanr i pisac? ok pisca smo namestili?
-			retVal.setTitle("" + information.getTitle());
-			retVal.setKeywords("" + information.getKeywords());
+//			retVal.setTitle("" + information.getTitle());
+//			retVal.setKeywords("" + information.getKeywords());
 			retVal.setFilename(file.getCanonicalPath());
 			
 			pdf.close();

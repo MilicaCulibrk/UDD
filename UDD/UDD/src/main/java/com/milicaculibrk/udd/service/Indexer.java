@@ -11,11 +11,9 @@ import java.io.File;
 @Service
 public class Indexer {
 	
-	// Pravio sam
 	@Autowired
 	private BookRepository bookRepository;
 
-	//koristi metodu od PDF Handlera (samo uzima bajtove i konvertuje u PDF)
 	public Indexer() {
 	}
 	
@@ -35,7 +33,6 @@ public class Indexer {
 			return false;
 	}
 
-	//dodavannje kljige
 	public boolean add(IndexUnit indexUnit){
 
 		indexUnit = bookRepository.index(indexUnit);

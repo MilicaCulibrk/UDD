@@ -16,7 +16,6 @@ public class SearchService {
 
         if (!searchDTO.getTitle().equals("")){
             org.elasticsearch.index.query.QueryBuilder title = QueryBuilder.buildQuery(searchDTO.getSearchType(),
-                    //title su polja iz index unita, tu napisem koja polja pretrazujem
                     "title", searchDTO.getTitle().toLowerCase());
 
             query = checkOperator(searchDTO.getOperatorTitle(), query, title);
@@ -46,7 +45,6 @@ public class SearchService {
 
         }
 
-        //za text je drugacije, jer ima string kveri a ne bilder
         if (!searchDTO.getText().equals("")){
             org.elasticsearch.index.query.QueryBuilder text = QueryBuilders.queryStringQuery(searchDTO.getText());
 

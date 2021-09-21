@@ -8,10 +8,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = IndexUnit.INDEX_NAME, shards = 1, replicas = 0)
 public class IndexUnit {
 
-    public static final String INDEX_NAME = "book"; //indeks se zove book
-    //posebna notacije sta su mu fildovi, objektu za Elastic Search, samo ovo se napravi, model za indeksiranje
-    //kako se cuva u Elastic Searchu
-    //tekst se analizira srp analzerom
+    public static final String INDEX_NAME = "book";
+
     @Id
     @Field(type = FieldType.Keyword)
     private String filename;

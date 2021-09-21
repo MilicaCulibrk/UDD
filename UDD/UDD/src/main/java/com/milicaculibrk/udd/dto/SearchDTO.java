@@ -1,7 +1,5 @@
 package com.milicaculibrk.udd.dto;
 
-import com.milicaculibrk.udd.enums.SearchType;
-
 public class SearchDTO {
 
     private String title;
@@ -14,12 +12,12 @@ public class SearchDTO {
     private String operatorKeyWords;
     private String text;
     private String operatorText;
-    private SearchType searchType;
+    private String searchType;
 
     public SearchDTO() {
     }
 
-    public SearchDTO(String title, String operatorTitle, String writer, String operatorWriter, String genres, String operatorGenres, String keyWords, String operatorKeyWords, String text, String operatorText, SearchType searchType) {
+    public SearchDTO(String title, String operatorTitle, String writer, String operatorWriter, String genres, String operatorGenres, String keyWords, String operatorKeyWords, String text, String operatorText, String searchType) {
         this.title = title;
         this.operatorTitle = operatorTitle;
         this.writer = writer;
@@ -113,11 +111,11 @@ public class SearchDTO {
         this.operatorText = operatorText;
     }
 
-    public SearchType getSearchType() {
+    public String getSearchType() {
         return searchType;
     }
 
-    public void setSearchType(SearchType searchType) {
+    public void setSearchType(String searchType) {
         this.searchType = searchType;
     }
 }
